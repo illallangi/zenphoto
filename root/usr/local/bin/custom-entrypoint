@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+touch /var/www/html/zp-data/charset_tést
+chown 33.33 /var/www/html/zp-data/charset_tést
+chmod 0600 /var/www/html/zp-data/charset_tést
+
+exec $@
