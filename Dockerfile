@@ -1,5 +1,5 @@
 # main image
-FROM php:7.4-fpm
+FROM php:8.1.2-fpm
 
 # install caddy
 COPY --from=ghcr.io/illallangi/caddy-builder:v0.0.1 /usr/bin/caddy /usr/local/bin/caddy
