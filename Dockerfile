@@ -87,4 +87,8 @@ VOLUME \
   /var/www/html/uploaded \
   /var/www/html/zp-data
 
-CMD ["custom-entrypoint", "caddy", "run", "-config", "/etc/caddy/Caddyfile", "--watch"]
+# set entrypoint
+ENTRYPOINT ["custom-entrypoint"]
+
+# set command
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile", "--watch"]
