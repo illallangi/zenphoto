@@ -1,27 +1,35 @@
+# caddy image
+FROM ghcr.io/illallangi/caddy-builder:v0.0.3 as caddy
+
 # main image
 FROM php:7.4-fpm
 
 # install caddy
-COPY --from=ghcr.io/illallangi/caddy-builder:v0.0.1 /usr/bin/caddy /usr/local/bin/caddy
+COPY --from=caddy /usr/bin/caddy /usr/local/bin/caddy
 
 ARG ZENPHOTO_VERSION=1.5.9
 
 ADD https://github.com/zenphoto/zenphoto/archive/v${ZENPHOTO_VERSION}.tar.gz /usr/local/src/zenphoto.tar.gz
 
 # install php extensions
-RUN apt-get update -y \
-    && \
-    apt-get install -y \
-      imagemagick \
-      libbz2-dev \
-      libgd-dev \
-      libicu-dev \
-      libjpeg-dev \
-      libmagickwand-dev \
-      libpng-dev \
-      libtidy-dev \
-      libzip-dev \
-      locales
+RUN DEBIAN_FRONTEND=noninteractive \
+  apt-get update \
+  && \
+  apt-get install -y --no-install-recommends \
+    imagemagick=8:6.9.11.60+dfsg-1.3 \
+    libbz2-dev=1.0.8-4 \
+    libgd-dev=2.3.0-2 \
+    libicu-dev=67.1-7 \
+    libjpeg-dev=1:2.0.6-4 \
+    libmagickwand-dev=8:6.9.11.60+dfsg-1.3 \
+    libpng-dev=1.6.37-3 \
+    libtidy-dev=2:5.6.0-11 \
+    libzip-dev=1.7.3-1 \
+    locales=2.31-13+deb11u3 \
+  && \
+  apt-get clean \
+  && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && \
     locale-gen
@@ -30,7 +38,7 @@ RUN docker-php-ext-configure gd \
       --with-jpeg=/usr/include/ \
       --with-freetype=/usr/include/ \
     && \
-    docker-php-ext-install -j$(nproc) \
+    docker-php-ext-install -j"$(nproc)" \
       bz2 \
       exif \
       gd \
