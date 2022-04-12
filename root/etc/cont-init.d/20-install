@@ -3,19 +3,19 @@ set -e
 
 tar \
       --strip-components=1 \
-      --exclude=README.md \
-      --exclude=SECURITY.md \
-      --exclude=SUPPORT.md \
-      --exclude=LICENSE \
-      --exclude=contributing.md \
-      --exclude=albums \
-      --exclude=backup \
-      --exclude=cache \
-      --exclude=cache_html \
-      --exclude=uploaded \
-      --exclude=plugins \
-      --exclude=zp-data \
-      --exclude=.git* \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/README.md \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/SECURITY.md \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/SUPPORT.md \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/LICENSE \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/contributing.md \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/albums \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/backup \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/cache \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/cache_html \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/uploaded \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/plugins \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/zp-data \
+      --exclude=zenphoto-${ZENPHOTO_VERSION}/.git* \
       --gzip \
       --extract \
       --file /usr/local/src/zenphoto.tar.gz

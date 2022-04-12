@@ -68,7 +68,7 @@ RUN chmod +x /tmp/s6-overlay-${OVERLAY_ARCH}-installer && /tmp/s6-overlay-${OVER
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 # Install ZenPhoto
-ARG ZENPHOTO_VERSION=1.5.9
+ENV ZENPHOTO_VERSION=1.5.9
 ADD https://github.com/zenphoto/zenphoto/archive/v${ZENPHOTO_VERSION}.tar.gz /usr/local/src/zenphoto.tar.gz
 
 COPY root /
