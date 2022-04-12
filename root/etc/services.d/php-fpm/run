@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+set -e
+
+umask 077
+exec /usr/local/sbin/php-fpm --nodaemonize

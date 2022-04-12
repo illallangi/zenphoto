@@ -1,0 +1,30 @@
+#!/usr/bin/with-contenv bash
+set -e
+
+export PUID=${PUID:-1000}
+export PGID=${PGID:-1000}
+
+find /var/www/html ! -group ${PGID} -exec chown ${PUID}.${PGID} {} \;
+find /var/www/html ! -user ${PUID} -exec chown ${PUID} {} \;
+
+find /var/www/html/{.htaccess,index.php,robots.txt,zp-core} -type d ! -perm 0500 -exec chmod 0500 {} \;
+find /var/www/html/{.htaccess,index.php,robots.txt,zp-core} -type f ! -perm 0400 -exec chmod 0400 {} \;
+
+find /var/www/html/{albums,backup,cache,cache_html,uploaded,plugins,themes,zp-data} -type d ! -perm 0700 -exec chmod 0700 {} \;
+find /var/www/html/{albums,backup,cache,cache_html,uploaded,plugins,themes,zp-data} -type f ! -perm 0600 -exec chmod 0600 {} \;
+
+# find /var/www/html -type d ! -perm 0700 -exec chmod 0700 {} \;
+# find /var/www/html -type f ! -perm 0600 -exec chmod 0600 {} \;
+
+# -r--------  1 www-data www-data  624 Apr 12 06:31 .htaccess
+# drwx------  2 www-data www-data 4.0K Jul  6  2021 albums
+# drwx------  2 www-data www-data 4.0K Apr 12 06:31 backup
+# drwx------  2 www-data www-data 4.0K Apr 12 06:31 cache
+# drwx------  2 www-data www-data 4.0K Apr 12 06:31 cache_html
+# -r--------  1 www-data www-data 1.7K Jul  6  2021 index.php
+# drwx------  5 www-data www-data 4.0K Jul  6  2021 plugins
+# -r--------  1 www-data www-data  842 Apr 12 06:31 robots.txt
+# dr-x------  6 www-data www-data 4.0K Jul  6  2021 themes
+# drwx------  2 www-data www-data 4.0K Jul  6  2021 uploaded
+# dr-x------ 12 www-data www-data 4.0K Jul  6  2021 zp-core
+# drwx------  2 www-data www-data 4.0K Jul  6  2021 zp-data
