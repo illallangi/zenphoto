@@ -1,0 +1,28 @@
+#!/usr/bin/with-contenv bash
+set -e
+
+tar \
+      --strip-components=1 \
+      --exclude=README.md \
+      --exclude=SECURITY.md \
+      --exclude=SUPPORT.md \
+      --exclude=LICENSE \
+      --exclude=contributing.md \
+      --exclude=albums \
+      --exclude=backup \
+      --exclude=cache \
+      --exclude=cache_html \
+      --exclude=uploaded \
+      --exclude=plugins \
+      --exclude=zp-data \
+      --exclude=.git* \
+      --gzip \
+      --extract \
+      --file /usr/local/src/zenphoto.tar.gz
+
+mkdir -p /var/www/html/{albums,backup,cache,cache_html,uploaded,plugins,zp-data}
+
+cp /var/www/html/zp-core/htaccess /var/www/html/.htaccess 
+cp /var/www/html/zp-core/example_robots.txt /var/www/html/robots.txt
+
+sed -i s/\\/zenphoto//g /var/www/html/robots.txt
