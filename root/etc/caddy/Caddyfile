@@ -1,19 +1,7 @@
-
-{
-    supervisor {
-        php-fpm {
-            restart_policy always
-            redirect_stdout stdout
-            redirect_stderr stderr
-            user www-data
-        }
-    }
-}
-
-localhost {
-    route /* {
-        root * /var/www/html
-        php_fastcgi 127.0.0.1:9000
-        file_server browse
-    }
+http:// {
+ 	route /* {
+ 	 	root * /var/www/html
+ 	 	php_fastcgi 127.0.0.1:9000
+ 	 	file_server browse
+ 	}
 }
