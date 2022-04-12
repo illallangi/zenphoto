@@ -1,5 +1,5 @@
 # main image
-FROM ghcr.io/illallangi/php-base:v0.0.1
+FROM ghcr.io/illallangi/php-base:v0.0.2
 # Install ZenPhoto
 ENV ZENPHOTO_VERSION=1.5.9
 ADD https://github.com/zenphoto/zenphoto/archive/v${ZENPHOTO_VERSION}.tar.gz /usr/local/src/zenphoto.tar.gz
