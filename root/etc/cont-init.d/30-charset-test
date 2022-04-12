@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+set -e
+
+touch /var/www/html/zp-data/charset_tést
